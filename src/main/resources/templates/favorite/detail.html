@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout :: head"></head>
+<body>
+<div class="container">
+    <div th:replace="layout :: nav"></div>
+    <div th:replace="layout :: flash"></div>
+    <div th:replace="layout :: search"></div>
+    <div class="result" th:if="${weather != null}">
+        <div class="weather">
+            <div class="location">
+                <form th:action="@{|/favorites/${favorite.id}/delete|}" method="post" class="inline">
+                    <button type="submit"><i class="fa fa-star"></i></button>
+                </form>
+                <span th:text="${favorite.formattedAddress}">City, State</span>
+            </div>
+            <div class="conditions">
+                <div class="temp"><span th:text="|${#numbers.formatInteger(weather.currently.temperature,0)}|">53</span><small>°</small></div>
+                <div class="summary" th:text="${weather.currently.summary}">Partly Sunny</div>
+                <div class="highlow" th:text="|${#numbers.formatInteger(weather.daily.data[0].temperatureMax,0)}° / ${#numbers.formatInteger(weather.daily.data[0].temperatureMin,0)}°|">100°F / 10°F</div>
+                <div class="icon"><i th:class="|wi ${@environment.getProperty(weather.currently.icon)}|"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

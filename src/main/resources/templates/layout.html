@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:fragment="head">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="A simple weather application powered by the Google Geocoding API and the Forecast.io API."/>
+
+    <link rel="icon" type="image/png" th:href="@{/assets/images/favicon.png}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/weather-icons.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/app.css}"/>
+
+    <title>How's the Weather?</title>
+</head>
+<body>
+<header th:fragment="header">
+    <h1>How's the Weather?</h1>
+</header>
+<div class="container">
+    <div th:fragment="nav" class="nav">
+        <ul>
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/favorites}">my favorites</a>
+            </li>
+            <li>
+                <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post"><button type="submit">logout</button></form>
+                <a sec:authorize="isAnonymous()" th:href="@{/login}">login</a>
+            </li>
+        </ul>
+    </div>
+    <div th:fragment="flash" th:if="${flash != null}">
+        <div class="message">
+            <div th:classappend="${#strings.toLowerCase(flash.status)}" th:text="${flash.message}" class="flash"></div>
+        </div>
+    </div>
+    <div th:fragment="search" id="search-form">
+        <form method="get" action="/search">
+            <input type="text" name="q" autocomplete="off" placeholder="search"/>
+        </form>
+    </div>
+</div>
+<footer th:fragment="footer">
+    <p><img th:src="@{/assets/images/google-maps-logo.png}" alt="Google Maps"/> + <img th:src="@{/assets/images/dark-sky-logo.png}" alt="Forecast.io"/></p>
+</footer>
+</body>
+</html>

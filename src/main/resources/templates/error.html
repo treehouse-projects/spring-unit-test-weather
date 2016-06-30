@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout :: head"></head>
+<body>
+<div class="container">
+    <div th:replace="layout :: nav"></div>
+    <div th:replace="layout :: flash"></div>
+    <div class="error">
+        <p th:text="${ex.message}"></p>
+    </div>
+</div>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
