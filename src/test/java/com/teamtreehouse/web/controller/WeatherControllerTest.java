@@ -1,5 +1,5 @@
 package com.teamtreehouse.web.controller;
 
-public class FavoriteControllerTest {
+public class WeatherControllerTest {
 
 }
